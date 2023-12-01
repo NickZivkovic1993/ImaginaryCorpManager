@@ -42,9 +42,42 @@ namespace ICMWPFUserInterface.ViewModels
             _apiHelper = ApiHelper;
         }
 
+       
+        public bool IsErrorVisible
+        {
+            get
+            {
+                bool output = false;
+                if (ErrorMessage?.Length>0)
+                {
+                    output = true;
+                }
+                return output; 
+            }
+            
+        }
+
+        private string _errorMessage;
+
+        
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                // CAREFUL ABOUT THE ORDER YOU MORON!!!
+                _errorMessage = value; 
+                NotifyOfPropertyChange(() => IsErrorVisible);
+                NotifyOfPropertyChange(() =>ErrorMessage);
+            }
+        }
+
+
+
         //Caliburn Possible Bug
         //Add ? (not null) after variables and seems to work
         //also changed from a method to a ctor
+
 
 
         public bool CanLogIn
@@ -64,12 +97,13 @@ namespace ICMWPFUserInterface.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
             }
             catch (Exception ex)
             {
 
-                Console.WriteLine(ex.Message);
+                ErrorMessage= ex.Message;
             }
         }
     }
