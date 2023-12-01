@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using ICMWPFUserInterface.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ICMWPFUserInterface.ViewModels
     public class LoginViewModel : Screen
     {
         private string _userName;
+        private string _password = "";
 
         public string UserName
         {
@@ -19,10 +21,10 @@ namespace ICMWPFUserInterface.ViewModels
             { 
                 _userName = value; 
                 NotifyOfPropertyChange(() => UserName);
+                NotifyOfPropertyChange(() => CanLogIn);
             }
         }
 
-        private string _password;
 
         public string Password
         {
@@ -30,14 +32,20 @@ namespace ICMWPFUserInterface.ViewModels
             set 
             { 
                 _password = value;
-                NotifyOfPropertyChange(() => UserName);
+                NotifyOfPropertyChange(() => Password);
+                NotifyOfPropertyChange(() => CanLogIn);
             }
         }
-       
+        private IAPIHelper _apiHelper;
+        public LoginViewModel(IAPIHelper ApiHelper)
+        {
+            _apiHelper = ApiHelper;
+        }
+
         //Caliburn Possible Bug
         //Add ? (not null) after variables and seems to work
         //also changed from a method to a ctor
-        
+
 
         public bool CanLogIn
         {
@@ -52,9 +60,17 @@ namespace ICMWPFUserInterface.ViewModels
             }
         }
 
-        public void LogIn(string userName, string password)
+        public async Task LogIn()
         {
-            Console.WriteLine();
+            try
+            {
+                var result = await _apiHelper.Authenticate(UserName, Password);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

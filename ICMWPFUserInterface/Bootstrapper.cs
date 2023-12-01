@@ -17,7 +17,15 @@ namespace ICMWPFUserInterface
         public Bootstrapper()
         {
             Initialize();
+
+
+            ConventionManager.AddElementConvention<PasswordBox>(
+            PasswordBoxHelper.BoundPasswordProperty,
+            "Password",
+            "PasswordChanged");
         }
+
+
 
         protected override void Configure()
         {
@@ -25,7 +33,8 @@ namespace ICMWPFUserInterface
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAPIHelper, APIHelper>();
 
             //Reflexion (i'm fine with taking performance hit here) since its only a few
             //ViewModels that are going to get used
