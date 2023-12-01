@@ -35,11 +35,9 @@ namespace ICMWPFUserInterface.ViewModels
         }
        
         //Caliburn Possible Bug
-
-        //public bool CanLogIn(string userName, string password)
-        //{
-        //    
-        //}
+        //Add ? (not null) after variables and seems to work
+        //also changed from a method to a ctor
+        
 
         public bool CanLogIn
         {
