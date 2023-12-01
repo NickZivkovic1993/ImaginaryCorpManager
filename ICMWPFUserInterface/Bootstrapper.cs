@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using ICMWPFUserInterface.Helpers;
 using ICMWPFUserInterface.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ICMWPFUserInterface
 {
@@ -57,5 +59,20 @@ namespace ICMWPFUserInterface
         {
             _container.BuildUp(instance);
         }
+
+        // initialization of a wpf password wireup problem ,
+        // seems to work right now with just a not null operand (?)
+
+        //public Bootstrapper()
+        //{
+        //    Initialize();
+
+        //    ConventionManager.AddElementConvention<PasswordBox>(
+        //        PasswordBoxHelper.BoundPasswordProperty,
+        //        "Password",
+        //        "PasswordChanged");
+        //}
     }
+
+
 }
