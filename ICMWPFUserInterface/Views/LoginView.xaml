@@ -48,6 +48,7 @@
            Padding="2"  Margin="0 5 0 10" HorizontalAlignment="Center" >
             Password:
         </TextBlock>
+        <!--//TODO: Redo xaml to get passwordbox to work-->
         <TextBox x:Name="Password" Grid.Row="3" Grid.Column="2"
           Margin="0 5 0 10" HorizontalAlignment="Center" MinWidth="350">
         </TextBox>

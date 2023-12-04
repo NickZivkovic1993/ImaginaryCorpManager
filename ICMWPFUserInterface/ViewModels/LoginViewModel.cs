@@ -77,8 +77,9 @@ namespace ICMWPFUserInterface.ViewModels
         //Caliburn Possible Bug
         //Add ? (not null) after variables and seems to work
         //also changed from a method to a ctor
+        // did stackoverflow answer 
 
-
+        //TODO: Redo xaml to get passwordbox to work
 
         public bool CanLogIn
         {
@@ -102,7 +103,6 @@ namespace ICMWPFUserInterface.ViewModels
             }
             catch (Exception ex)
             {
-
                 ErrorMessage= ex.Message;
             }
         }
