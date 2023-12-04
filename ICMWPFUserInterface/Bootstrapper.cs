@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
-using ICMWPFUserInterface.Helpers;
+using ICMWPFUserInterface.Library.Api;
+using ICMWPFUserInterface.Library.Models;
+//using ICMWPFUserInterface.Helpers;
 using ICMWPFUserInterface.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using TRMDesktopUI.Helpers;
 
 namespace ICMWPFUserInterface
 {
@@ -34,6 +37,7 @@ namespace ICMWPFUserInterface
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<ILoggedInUserModel,LoggedInUserModel>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             //Reflexion (i'm fine with taking performance hit here) since its only a few

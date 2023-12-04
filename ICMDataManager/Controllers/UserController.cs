@@ -15,12 +15,15 @@ namespace ICMDataManager.Controllers
     public class UserController : ApiController
     {
         //no Id in the method , it has to come from the logged in user
-        public List<UserModel> GetById()
+        [System.Web.Http.HttpGet]
+        public UserModel GetById()
         {
             string userId = RequestContext.Principal.Identity.GetUserId();
             UserData data = new UserData();
 
-            return data.GetUserById(userId);
+
+            //Default here might be a problem
+            return data.GetUserById(userId).FirstOrDefault();
         }        
         
     }

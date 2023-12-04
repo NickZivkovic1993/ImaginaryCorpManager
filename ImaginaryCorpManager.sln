@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICMWPFUserInterface", "ICMW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICMDataManager.Library", "ICMDataManager.Library\ICMDataManager.Library.csproj", "{470F2FD9-34B5-471A-87CE-DEBB9D007F77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICMWPFUserInterface.Library", "ICMWPFUserInterface.Library\ICMWPFUserInterface.Library.csproj", "{B5E687E7-7516-48AE-9452-67FA6A6C30F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,18 @@ Global
 		{470F2FD9-34B5-471A-87CE-DEBB9D007F77}.Release|x64.Build.0 = Release|Any CPU
 		{470F2FD9-34B5-471A-87CE-DEBB9D007F77}.Release|x86.ActiveCfg = Release|Any CPU
 		{470F2FD9-34B5-471A-87CE-DEBB9D007F77}.Release|x86.Build.0 = Release|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Debug|x64.Build.0 = Debug|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Release|x64.Build.0 = Release|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5E687E7-7516-48AE-9452-67FA6A6C30F4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

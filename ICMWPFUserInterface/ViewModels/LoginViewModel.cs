@@ -1,10 +1,11 @@
 ﻿using Caliburn.Micro;
-using ICMWPFUserInterface.Helpers;
+//using ICMWPFUserInterface.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ICMWPFUserInterface.Library.Api;
 
 namespace ICMWPFUserInterface.ViewModels
 {
@@ -12,7 +13,7 @@ namespace ICMWPFUserInterface.ViewModels
     public class LoginViewModel : Screen
     {
         private string _userName;
-        private string _password = "";
+        private string _password;
 
         public string UserName
         {
@@ -74,13 +75,6 @@ namespace ICMWPFUserInterface.ViewModels
 
 
 
-        //Caliburn Possible Bug
-        //Add ? (not null) after variables and seems to work
-        //also changed from a method to a ctor
-        // did stackoverflow answer 
-
-        //TODO: Redo xaml to get passwordbox to work
-
         public bool CanLogIn
         {
             get
@@ -98,8 +92,11 @@ namespace ICMWPFUserInterface.ViewModels
         {
             try
             {
+                //capture more info about user
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
             }
             catch (Exception ex)
             {
@@ -108,3 +105,10 @@ namespace ICMWPFUserInterface.ViewModels
         }
     }
 }
+
+        //Caliburn Possible Bug
+        //Add ? (not null) after variables and !seems to work
+        //also changed from a method to a ctor
+        // did stackoverflow answer 
+
+        //TODO: Redo xaml to get passwordbox to work
