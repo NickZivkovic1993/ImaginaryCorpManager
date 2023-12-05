@@ -34,10 +34,11 @@ namespace ICMWPFUserInterface.ViewModels
             }
         }
 
+        //caliburn will change text from view into int
+        //also it will validate it
+        private int _itemQuantity;
 
-        private string _itemQuantity;
-
-        public string ItemQuantity
+        public int ItemQuantity
         {
             get { return _itemQuantity; }
             set 

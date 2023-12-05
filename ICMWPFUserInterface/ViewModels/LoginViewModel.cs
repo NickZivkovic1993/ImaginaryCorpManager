@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ICMWPFUserInterface.Library.Api;
+using ICMWPFUserInterface.EventModels;
 
 namespace ICMWPFUserInterface.ViewModels
 {
@@ -14,6 +15,14 @@ namespace ICMWPFUserInterface.ViewModels
     {
         private string _userName;
         private string _password;
+        private IAPIHelper _apiHelper;
+        private readonly IEventAggregator _events;
+
+        public LoginViewModel(IAPIHelper ApiHelper, IEventAggregator events)
+        {
+            _apiHelper = ApiHelper;
+            _events = events;
+        }
 
         public string UserName
         {
@@ -36,11 +45,6 @@ namespace ICMWPFUserInterface.ViewModels
                 NotifyOfPropertyChange(() => Password);
                 NotifyOfPropertyChange(() => CanLogIn);
             }
-        }
-        private IAPIHelper _apiHelper;
-        public LoginViewModel(IAPIHelper ApiHelper)
-        {
-            _apiHelper = ApiHelper;
         }
 
        
@@ -97,6 +101,10 @@ namespace ICMWPFUserInterface.ViewModels
                 var result = await _apiHelper.Authenticate(UserName, Password);
 
                 await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
+                //publish a class instance for an empty class
+                //just to differentiate it from different events
+                _events.PublishOnUIThread(new LogOnEvent());
             }
             catch (Exception ex)
             {
