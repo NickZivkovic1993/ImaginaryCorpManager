@@ -18,9 +18,9 @@ namespace ICMWPFUserInterface.ViewModels
         private IAPIHelper _apiHelper;
         private readonly IEventAggregator _events;
 
-        public LoginViewModel(IAPIHelper ApiHelper, IEventAggregator events)
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
-            _apiHelper = ApiHelper;
+            _apiHelper = apiHelper;
             _events = events;
         }
 

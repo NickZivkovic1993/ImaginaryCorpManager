@@ -32,7 +32,9 @@ namespace ICMWPFUserInterface
 
         protected override void Configure()
         {
-            _container.Instance(_container);
+            //per request not an instance
+            _container.Instance(_container)
+                .PerRequest<IProductEndpoint, ProductEndpoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
