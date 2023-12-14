@@ -22,18 +22,6 @@ namespace ICMWPFUserInterface.ViewModels
         // really wanted to make it async since it makes sence here
         // really need to load products
         // add please wait screen while it loads?
-        protected override async void OnViewLoaded(object view)
-        {
-            base.OnViewLoaded(view);
-            await LoadProducts();
-        }
-        private async Task LoadProducts()
-        {
-            var productList = await _productEndpoint.GetAll();
-            Products = new BindingList<ProductModel>();
-        }
-
-
         private BindingList<ProductModel> _products;
 
         public BindingList<ProductModel> Products
@@ -45,6 +33,18 @@ namespace ICMWPFUserInterface.ViewModels
                 NotifyOfPropertyChange(() => Products);
             }
         }
+        private async Task LoadProducts()
+        {
+            var productList = await _productEndpoint.GetAll();
+            Products = new BindingList<ProductModel>(productList);
+        }
+        protected override async void OnViewLoaded(object view)
+        {
+            base.OnViewLoaded(view);
+            await LoadProducts();
+        }
+
+
 
         private BindingList<ProductModel> _cart;
 

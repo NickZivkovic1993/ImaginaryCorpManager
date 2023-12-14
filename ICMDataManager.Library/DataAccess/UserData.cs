@@ -22,7 +22,7 @@ namespace ICMDataManager.Library.DataAccess
             // pass in a new object ID from input and put it into Id prop
             var p = new { Id = Id }; // pass it into LoadData  -- Has to be in the same assebly
 
-            var output = sql.LoadData<UserModel, dynamic>("spUserLookup", p, "ICMData");
+            var output = sql.LoadData<UserModel, dynamic>("dbo.spUserLookup", p, "ICMData");
 
             return output;
             //Also add unit testing

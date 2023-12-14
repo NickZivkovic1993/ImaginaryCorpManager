@@ -33,14 +33,13 @@
         <!--Column 1-->
         <TextBlock Text="Items" Grid.Row="1" Grid.Column="1"/>
         <ListBox x:Name="Products" Grid.Row="2" Grid.Column="1"
-                  MinHeight="200" MinWidth="150">
+                  MinHeight="300" MinWidth="200">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding ProductName}">
-
-                    </TextBlock>
+                    <TextBlock Text="{Binding ProductName}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            
         </ListBox>
 
         <!--Column 2-->
