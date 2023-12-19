@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ICMWPFUserInterface.Library.Api;
+using ICMWPFUserInterface.Library.Helpers;
 using ICMWPFUserInterface.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace ICMWPFUserInterface.ViewModels
     public class SalesViewModel : Screen
     {
         private IProductEndpoint _productEndpoint;
-        public SalesViewModel(IProductEndpoint productEndpoint)
+        private IConfigHelper _configHelper;
+        public SalesViewModel(IProductEndpoint productEndpoint , IConfigHelper configHelper)
         {
             //di done on the frontend
             _productEndpoint = productEndpoint;
+            _configHelper = configHelper;
         }
         // async doesnt work with ctors
         // really wanted to make it async since it makes sence here
@@ -91,22 +94,46 @@ namespace ICMWPFUserInterface.ViewModels
         {
             get
             {
-                decimal subTotal = 0;
-                foreach (var item in Cart)
-                {
-                    subTotal += (item.Product.RetailPrice * item.QuantityInCart);
-                }
-                //"C" convert to Currency
-                return subTotal.ToString("C");
+                return CalculateSubTotal().ToString("C");
             }
         }
 
+        private decimal CalculateSubTotal()
+        {
+            decimal subTotal = 0;
+
+            foreach (var item in Cart)
+            {
+                subTotal += (item.Product.RetailPrice * item.QuantityInCart);
+            }
+
+            return subTotal;
+        }
+
+        private decimal CalculateTax()
+        {
+            decimal taxAmount = 0;
+            decimal taxRate = _configHelper.GetTaxRate() / 100;
+
+            taxAmount = Cart
+                .Where(x => x.Product.IsTaxable)
+                .Sum(x => x.Product.RetailPrice * x.QuantityInCart * taxRate);
+
+            //foreach (var item in Cart)
+            //{
+            //    if (item.Product.IsTaxable)
+            //    {
+            //        taxAmount += (item.Product.RetailPrice * item.QuantityInCart * taxRate);
+            //    }
+            //}
+
+            return taxAmount;
+        }
         public string Tax
         {
             get
             {
-                //TODO: replace with calculation
-                return "0.00";
+                return CalculateTax().ToString("C");
             }
         }
 
@@ -114,8 +141,8 @@ namespace ICMWPFUserInterface.ViewModels
         {
             get
             {
-                //TODO: replace with calculation
-                return "0.00";
+                decimal total = CalculateSubTotal() + CalculateTax();
+                return total.ToString("C");
             }
         }
 
@@ -140,7 +167,7 @@ namespace ICMWPFUserInterface.ViewModels
             if(existingItem != null)
             {
                 existingItem.QuantityInCart += ItemQuantity;
-                //nooot! happy about the hack solution...
+                //not! happy about the hack solution...
                 // try to find a better way to refresh existingItem
                 Cart.Remove(existingItem);
                 Cart.Add(existingItem);
@@ -160,6 +187,8 @@ namespace ICMWPFUserInterface.ViewModels
             SelectedProduct.QuantityInStock -= ItemQuantity;
             ItemQuantity = 1;
             NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
             NotifyOfPropertyChange(() => Cart);
         }
 
@@ -175,7 +204,11 @@ namespace ICMWPFUserInterface.ViewModels
         public void RemoveFromCart()
         {
 
+
             NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => Cart);
         }
 
         public bool CanCheckOut

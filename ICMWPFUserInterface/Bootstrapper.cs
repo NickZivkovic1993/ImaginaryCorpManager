@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ICMWPFUserInterface.Library.Api;
+using ICMWPFUserInterface.Library.Helpers;
 using ICMWPFUserInterface.Library.Models;
 //using ICMWPFUserInterface.Helpers;
 using ICMWPFUserInterface.ViewModels;
@@ -40,6 +41,7 @@ namespace ICMWPFUserInterface
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel,LoggedInUserModel>()
+                .Singleton<IConfigHelper, ConfigHelper>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             //Reflexion (i'm fine with taking performance hit here) since its only a few
