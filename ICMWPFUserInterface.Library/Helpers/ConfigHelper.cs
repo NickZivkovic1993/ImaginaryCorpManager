@@ -12,7 +12,7 @@ namespace ICMWPFUserInterface.Library.Helpers
         public decimal GetTaxRate()
         {
             decimal output = 0;
-
+            // Pull from App.Config taxRate 
             string rateText = ConfigurationManager.AppSettings["taxRate"];
 
             bool isValidTaxRate = Decimal.TryParse(rateText, out output);

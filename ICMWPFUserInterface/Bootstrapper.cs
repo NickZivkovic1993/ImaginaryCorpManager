@@ -33,6 +33,7 @@ namespace ICMWPFUserInterface
 
         protected override void Configure()
         {
+            // Move to a class of just container configuration?
             //per request not an instance
             _container.Instance(_container)
                 .PerRequest<IProductEndpoint, ProductEndpoint>();
