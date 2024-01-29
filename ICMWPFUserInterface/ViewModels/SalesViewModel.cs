@@ -116,13 +116,19 @@ namespace ICMWPFUserInterface.ViewModels
             decimal taxRate = _configHelper.GetTaxRate() / 10000;
 
 
-            foreach (var item in Cart)
-            {
-                if (item.Product.IsTaxable)
-                {
-                    taxAmount += (item.Product.RetailPrice * item.QuantityInCart * taxRate);
-                }
-            }
+            //foreach (var item in Cart)
+            //{
+            //    if (item.Product.IsTaxable)
+            //    {
+            //        taxAmount += (item.Product.RetailPrice * item.QuantityInCart * taxRate);
+            //    }
+            //}
+
+            //refactor with Linq
+
+            taxAmount = Cart
+                .Where(x => x.Product.IsTaxable)
+                .Sum(x => x.Product.RetailPrice *  x.QuantityInCart * taxRate);
 
             return taxAmount;
         }
