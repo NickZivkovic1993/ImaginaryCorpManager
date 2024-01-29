@@ -113,7 +113,7 @@ namespace ICMWPFUserInterface.ViewModels
         private decimal CalculateTax()
         {
             decimal taxAmount = 0;
-            decimal taxRate = _configHelper.GetTaxRate() / 100;
+            decimal taxRate = _configHelper.GetTaxRate() / 10000;
 
 
             foreach (var item in Cart)

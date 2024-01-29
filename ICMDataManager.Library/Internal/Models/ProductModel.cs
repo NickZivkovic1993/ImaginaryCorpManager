@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ICMDataManager.Library.Internal.Models
 {
 //    SELECT [Id], [ProductName], [Description], 
-//	[QuantityInStock]
+//	[QuantityInStock] [IsTaxable]
     public class ProductModel
     {
         // triple comments 
@@ -19,5 +19,6 @@ namespace ICMDataManager.Library.Internal.Models
         public string Description { get; set; }
         public decimal RetailPrice { get; set; }
         public int QuantityInStock { get; set; }
+        public bool IsTaxable { get; set; }
     }
 }
